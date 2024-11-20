@@ -3,6 +3,8 @@ const connectToDb  = require('./config/db')
 const express = require('express');
 const authRoutes = require('./routes/authRoutes');
 const { authenticateJWT } = require('./middlewares/authMiddleware');
+const bookRoutes = require('./routes/bookRoutes');
+
 
 const app = express();
 
@@ -14,11 +16,13 @@ app.get('/protect',authenticateJWT, (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/book', bookRoutes);
 
 
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
 
 
