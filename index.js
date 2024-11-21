@@ -4,6 +4,8 @@ const express = require('express');
 const authRoutes = require('./routes/authRoutes');
 const { authenticateJWT } = require('./middlewares/authMiddleware');
 const bookRoutes = require('./routes/bookRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+
 
 
 const app = express();
@@ -17,6 +19,19 @@ app.get('/protect',authenticateJWT, (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/book', bookRoutes);
+app.use('/api/reviews', reviewRoutes);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const PORT = 3000;
