@@ -65,6 +65,7 @@ async function handleCommand(command, message, args) {
             return message.reply('Usage: `!deletebook [book ID]`');
         }
         try {
+            
             const book = await bookService.deleteBook(bookId);
             if (book) {
                 message.reply(`Book ID ${bookId} has been deleted.`);

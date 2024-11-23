@@ -8,7 +8,7 @@ const reviewRoutes = require('./routes/reviewRoutes');
 const { Client, GatewayIntentBits } = require('discord.js');
 const { handleCommand } = require('./routes/botRoutes');
 require('dotenv').config();
-
+const cors = require("cors");
 
 const DISCORD_TOKEN = process.env.DISCORD_TOKEN;
 const app = express();
@@ -16,7 +16,15 @@ const app = express();
 //const client =  new Discord.Client();
 
 app.use(express.json());
+app.use(
+    cors({
+      origin: "http://localhost:3000", // Allow only this origin
+      methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+      allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
+    })
+  );
 
+  
 connectToDb();
 app.get('/protect',authenticateJWT, (req, res) => {
     res.send('Hello, Node.js!')
@@ -66,7 +74,7 @@ client.once('ready', () => {
 
 
 // Log in the bot using your token
-client.login(process.env.DISCORD_TOKEN);
+//client.login(process.env.DISCORD_TOKEN);
 
 
 
@@ -78,7 +86,7 @@ client.login(process.env.DISCORD_TOKEN);
 
 
 
-const PORT = 3000;
+const PORT = 8080;
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
