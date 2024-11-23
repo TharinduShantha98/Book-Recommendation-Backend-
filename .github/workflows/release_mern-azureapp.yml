@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - mern-azureApp
 on:
   push:
     branches:
-      - release
+      -release
   workflow_dispatch:
 
 jobs:
