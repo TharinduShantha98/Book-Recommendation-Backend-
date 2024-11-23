@@ -86,7 +86,7 @@ client.once('ready', () => {
 
 
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080; // Use Azure-assigned PORT or default to 8080 for local testing
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
