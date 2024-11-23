@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - mern-azureApp
 on:
   push:
     branches:
-      -release
+      - release
   workflow_dispatch:
 
 jobs:
@@ -51,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_33D97B6758DF4A529361A792AAA49A08 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_92FC203852A44DF1A96B304E2E5F729D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4EACFE21EB7C4C41B0B1848034787AFD }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_91FA485E88F54E32B9435B99FD1926D3 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_C40B047D4C354324860195ACC7A61A42 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_39336B4FEB714BA2B21FE35A5BEA1120 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
