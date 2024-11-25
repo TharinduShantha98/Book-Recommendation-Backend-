@@ -54,3 +54,20 @@ This project is a **Discord bot** designed to replicate the functionality of a B
   - Developed using [discord.js](https://discord.js.org/).
 
 ---
+
+## Latest code in Release branch 
+### Please move the Release branch.
+### Deploying the Application to Azure
+---
+To deploy the application in Azure, start by creating a resource group to organize resources, followed by an App Service Plan to define the compute resources, and then create an App Service or Web App to host the application. Next, connect the GitHub repository to Azure using a deployment pipeline, push the code to the release branch in GitHub, and finally, set up the required environment variables in Azure to configure the applicatio
+
+
+
+
+
+
+
+
+
+
+
