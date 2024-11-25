@@ -1,8 +1,11 @@
 const bookController = require('../controllers/bookController');
 const bookService = require('../services/bookService');
+const reviewService = require('../services/reviewService');
+const { get } = require('./reviewRoutes');
 
 async function handleCommand(command, message, args) {
     console.log("command " , command);
+    console.log("command " , message);
     if (command === 'addbook') {
         if (!args.length) {
             return message.reply('Please provide a book title to add.');
@@ -11,7 +14,7 @@ async function handleCommand(command, message, args) {
         console.log("bookTitle ",title);
         try {
             if (!title || !description) {
-                return message.reply('Usage: `!addbook [book ID] [new title]`');
+                return message.reply('Usage: `!addbook [add _title] [add _description]`');
             }
             const bookData = {
                 title: title, author:author,userId:message.author.id,description:description
@@ -43,7 +46,7 @@ async function handleCommand(command, message, args) {
         const bookId = args[0];
         const newTitle = args.slice(1).join(' ');
         if (!bookId || !newTitle) {
-            return message.reply('Usage: `!editbook [book ID] [new title]`');
+            return message.reply('Usage: `!editbook [new _book ID] [new _title]`');
         }
         const bookData = {
             title: newTitle
@@ -65,7 +68,6 @@ async function handleCommand(command, message, args) {
             return message.reply('Usage: `!deletebook [book ID]`');
         }
         try {
-            
             const book = await bookService.deleteBook(bookId);
             if (book) {
                 message.reply(`Book ID ${bookId} has been deleted.`);
@@ -76,7 +78,37 @@ async function handleCommand(command, message, args) {
             console.error(error);
             message.reply('An error occurred while deleting the book.');
         }
-    } else {
+    }else if(command === 'addreview') {
+        const [bookId,reviewText,rating] = args; 
+
+        if(!bookId || !reviewText || !rating){
+            return message.reply('Usage: `!addbook [add _bookID] [add _reviewText] [add _rating]`');
+        }
+        const createReview =  await reviewService.createReview(bookId,'',reviewText,rating);
+        if(createReview){
+            message.reply(`Review added scuccess for ${bookId}`);
+        }else{
+            message.reply(`An error occurred while adding the Review.`);
+        }
+    }else if (command === 'listreviews'){
+        const [bookId] = args; 
+        if(!bookId){
+            return message.reply('Usage: `!addbook [add _bookID]`');
+        }
+
+        const getAllBooks =  await reviewService.getReviewsByBookId(bookId);
+        console.log(getAllBooks);
+
+
+        const bookList = getAllBooks.map((getAllBooks, index) => `${index + 1}. ID: ${getAllBooks._id}  review :${getAllBooks.reviewText}  rating :${getAllBooks.rating}`).join('\n');
+        if(bookList){
+            return message.reply(`Here are your reviews :\n${bookList}`);
+        }else{
+            return message.reply(`reviews not found!`);
+        }
+
+    }
+    else {
         message.reply(`Unknown command: \`${command}\``);
     }
 }

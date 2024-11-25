@@ -6,15 +6,11 @@ const reviewSchema = new mongoose.Schema({
         ref: 'Book',
         required: true,
     },
-    userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
+    userId: {type: String },
     reviewText: {
         type: String,
         required: true,
-        minlength: [10, 'Review must be at least 10 characters long'],
+        minlength: [3, 'Review must be at least 10 characters long'],
     },
     rating: {
         type: Number,
@@ -22,6 +18,7 @@ const reviewSchema = new mongoose.Schema({
         min: [1, 'Rating must be between 1 and 5'],
         max: [5, 'Rating must be between 1 and 5'],
     },
+    
     createdAt: {
         type: Date,
         default: Date.now,

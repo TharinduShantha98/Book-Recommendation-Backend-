@@ -15,7 +15,10 @@ class AuthService {
         console.log('email', email);
         console.log('password', password);
 
-
+        const Alreadyuser = await User.findOne({ email });
+        if(Alreadyuser){
+            throw new Error("Already registed user!");
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({name, email, password: hashedPassword });
         try {

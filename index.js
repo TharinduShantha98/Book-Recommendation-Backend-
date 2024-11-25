@@ -50,21 +50,27 @@ const prefix = '!';
 client.on('messageCreate', async (message) => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
-    const args = message.content.slice(prefix.length).trim().split(/ +/);
-    const command = args.shift().toLowerCase();
-   
-    console.log(command, args)
     try {
+        const messageContent = message.content; 
+        const content = messageContent.slice(prefix.length).trim();
+        console.log('Content:', content);
+        let args = content
+            .split('_') 
+            .filter((item) => item.trim() !== '') 
+            .map((item) => item.trim());
+
+        console.log('Arguments before removal:', args);
+        args.shift();
+        console.log('Arguments after removal:', args);
+        const command = content.split(' ')[0]; 
+        console.log('Command:', command);
         await handleCommand(command, message, args);
     } catch (err) {
         console.error(err);
         message.reply('An error occurred while executing the command.');
     }
-        
-
-   
-    
 });
+
 
 
 
@@ -74,7 +80,7 @@ client.once('ready', () => {
 
 
 // Log in the bot using your token
-//client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
 
 
 
