@@ -90,6 +90,9 @@ This bot helps manage a book collection and reviews directly within your Discord
 - **Description:**  
   Lists all reviews for the specified book.
 
+
+Discord bookRecommendation 
+https://discord.gg/V5qRnfCm
 ---
 
 ## Notes
